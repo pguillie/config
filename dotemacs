@@ -1,0 +1,59 @@
+;; Default configuration
+(setq-default font-lock-global-modes t
+	      line-number-mode t
+	      column-number-mode t
+	      c-backspace-function 'backward-delete-char)
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; 42 header
+(if (file-accessible-directory-p "~/.emacs.d/42-header/")
+    (progn (add-to-list 'load-path "~/.emacs.d/42-header/")
+	   (load "list.el")
+	   (load "string.el")
+	   (load "comments.el")
+	   (load "header.el")))
+
+;; Indentation
+(setq-default indent-tabs-mode t
+	      c-default-style "linux"
+	      sh-basic-offset 8)
+
+(c-set-offset 'brace-list-intro '+)
+(c-set-offset 'brace-list-entry '0)
+(c-set-offset 'arglist-intro '+)
+(c-set-offset 'arglist-cont 0)
+(c-set-offset 'arglist-cont-nonempty '+)
+(c-set-offset 'arglist-close 0)
+
+;; Navigation
+(global-set-key (kbd "C-x .") 'other-window)
+(global-set-key (kbd "C-x ,") 'prev-window)
+
+(defun prev-window ()
+  (interactive)
+  (other-window -1))
+
+;; Backups
+(defvar backupdir "~/.emacs.d/backups")
+
+(if (not (file-exists-p backupdir))
+    (make-directory backupdir t))
+
+(setq backup-directory-alist `(("." . ,backupdir))
+      make-backup-files t
+      backup-by-copying t
+      version-control t
+      delete-old-versions t
+      kept-old-versions 2
+      kept-new-versions 6)
+
+;; NASM
+(if (file-exists-p "~/.emacs.d/nasm-mode.el")
+    (progn (load-file "~/.emacs.d/nasm-mode.el")
+	   (add-to-list 'auto-mode-alist '("\\.s\\'" . nasm-mode))))
+
+;; Themes
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(if (file-exists-p "~/.emacs.d/themes/monokai-theme.el")
+    (load-theme 'monokai t))
