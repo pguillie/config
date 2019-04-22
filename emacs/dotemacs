@@ -49,8 +49,8 @@
       kept-new-versions 6)
 
 ;; NASM
-(if (file-exists-p "~/.emacs.d/nasm-mode.el")
-    (progn (load-file "~/.emacs.d/nasm-mode.el")
+(if (file-exists-p "~/.emacs.d/modes/nasm-mode.el")
+    (progn (load-file "~/.emacs.d/modes/nasm-mode.el")
 	   (add-to-list 'auto-mode-alist '("\\.s\\'" . nasm-mode))))
 
 ;; Themes
