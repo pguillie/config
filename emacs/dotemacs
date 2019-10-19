@@ -1,3 +1,4 @@
+;; Use the MELPA repository
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
@@ -16,7 +17,9 @@ There are two things you can do about this warning:
     ;; For important compatibility libraries like cl-lib
     (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
-(setq package-list '(ac-c-headers auto-complete nasm-mode monokai-theme))
+
+;;Install usefull packages
+(setq package-list '(auto-complete ac-c-headers dumb-jump nasm-mode monokai-theme))
 (unless package-archive-contents
   (package-refresh-contents))
 (dolist (package package-list)
@@ -40,34 +43,16 @@ There are two things you can do about this warning:
 (setq-default
  font-lock-global-modes t
  indent-tabs-mode t
+ show-paren-mode t
  line-number-mode t
  column-number-mode t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-(ac-config-default)	;auto-complete
+(ac-config-default)			;auto-complete
 
 ;; Load specific init files
 (add-to-list 'load-path "~/.emacs.d/init/")
 (load "keybindings.el")
 (load "c-config.el")
+(load "sh-config.el")
 (load "nasm-config.el")
 (load "themes.el")
-(load "~/.emacs.d/42-header/list.el")
-(load "~/.emacs.d/42-header/string.el")
-(load "~/.emacs.d/42-header/comments.el")
-(load "~/.emacs.d/42-header/header.el")
-
-;; Custom (automatic)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (ac-c-headers auto-complete auto-complete-c-headers nasm-mode monokai-theme))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

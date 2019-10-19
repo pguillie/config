@@ -22,7 +22,7 @@
 ;    By: login____ <mail_______@student.42.fr>      +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: yyyy/mm/dd 15:27:11 by login____         #+#    #+#              ;
-;    Updated: 2019/08/13 10:02:58 by paul             ###   ########.fr        ;
+;    Updated: 2019/10/19 19:56:48 by pguillie         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -32,7 +32,7 @@
 (setq write-file-hooks (cons 'header-update write-file-hooks))
 
 
-(set 'user-login (let ((login (getenv "USER42")))
+(set 'user-login (let ((login (getenv "LOGNAME")))
 				   (if (string= login nil)
 					   "marvin"
 					 login)
@@ -40,7 +40,7 @@
 	 )
 
 
-(set 'user-mail (let ((mail (getenv "MAIL42")))
+(set 'user-mail (let ((mail (getenv "MAIL")))
 				   (if (string= mail nil)
 					   "marvin@42.fr"
 					 mail)
