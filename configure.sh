@@ -22,10 +22,8 @@ for prog in $programs; do
 	for script in ./scripts/*; do
 	    $script
 	done
-    elif [ $prog == "emacs" ]; then
-	./scripts/config_emacs.sh
-    elif [ $prog == 'tmux' ]; then
-	./scripts/config_tmux.sh
+    elif [ -x ./scripts/config_$prog.sh ]; then
+	    ./scripts/config_$prog.sh
     else
 	echo "ERROR: No configuration provided for \"$prog\"" 1>&2
     fi
