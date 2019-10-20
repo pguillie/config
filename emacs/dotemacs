@@ -47,11 +47,11 @@ There are two things you can do about this warning:
  column-number-mode t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (ac-config-default)			;auto-complete
-(show-paren-mode 1)			;highlight matching parentheses
 
 ;; Load specific init files
 (add-to-list 'load-path "~/.emacs.d/init/")
 (load "keybindings.el")
+(load "highlights.el")
 (load "c-config.el")
 (load "sh-config.el")
 (load "nasm-config.el")
