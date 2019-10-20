@@ -27,9 +27,8 @@ fi
 echo "Create $home/.emacs.d/init directory..."
 cp -r emacs/emacs.d/init $home/.emacs.d
 
-read -p '> Do you want to install the 42 header? (Y/n)' header
-if [[ $header =~ ^[Yy] ]]; then
-	read -p '> Enter your 42 login: ' login
+read -p '> Enter your login for the 42 Header (leave blank to disable): ' login
+if [[ -n $login ]]; then
 	echo "Create $home/.emacs.d/42-header directory..."
 	cp -r emacs/emacs.d/42-header $home/.emacs.d
 	echo '(load "42-header.el")' >> $home/.emacs
