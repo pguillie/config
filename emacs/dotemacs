@@ -43,11 +43,11 @@ There are two things you can do about this warning:
 (setq-default
  font-lock-global-modes t
  indent-tabs-mode t
- show-paren-mode t
  line-number-mode t
  column-number-mode t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (ac-config-default)			;auto-complete
+(show-paren-mode 1)			;highlight matching parentheses
 
 ;; Load specific init files
 (add-to-list 'load-path "~/.emacs.d/init/")
