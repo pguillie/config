@@ -2,7 +2,7 @@
 
 cd `dirname $0`
 
-if ! grep pguillie/config.git .git/config 1>/dev/null 2>&1; then
+if ! grep "pguillie/config" .git/config 1>/dev/null 2>&1; then
     echo "ERROR: this script must be executed in its repository"
     exit 1;
 fi
