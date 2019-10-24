@@ -1,5 +1,8 @@
 ;; Highlights
 
+;; region
+(set-face-background 'region "brightblack")
+
 ;; current line
 (global-hl-line-mode t)
 (set-face-background 'hl-line "#424242")
