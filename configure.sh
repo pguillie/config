@@ -1,30 +1,34 @@
 #!/bin/bash
 
 cd `dirname $0`
-
-if ! grep "pguillie/config" .git/config 1>/dev/null 2>&1; then
+if ! grep -q "pguillie/config" .git/config; then
     echo "ERROR: this script must be executed in its repository"
     exit 1;
 fi
 
-if [[ -z $@ ]]; then
-    echo "You need to specify at least one program you want to configure:" \
-	 $'\n * emacs' \
-	 $'\n * tmux'
-    read programs
-else
-    programs=$@
+if [[ -z $1 ]];then arg=*;yes=
+elif [[ $@ == "-y" ]];then arg=*;yes=t
+else arg=$@;yes=t
 fi
 
-for prog in $programs; do
-
-    if [ $prog == "all" ];then
-	for script in ./scripts/*; do
-	    $script
-	done
-    elif [ -x ./scripts/config_$prog.sh ]; then
-	    ./scripts/config_$prog.sh
-    else
-	echo "ERROR: No configuration provided for \"$prog\"" 1>&2
-    fi
+for a in $arg; do
+	if ! [ -d $a ];then
+		continue;
+	elif ! [ -x $a/config.sh ]; then
+		echo 1>&2 "Error: $a: no configuration found"
+		continue
+	fi
+	if [ -z $yes ]; then
+		read -p "Configure $a ? [Y/n] " y
+		if ! [[ $y =~ ^[Yy] ]]; then
+			continue
+		fi
+	fi
+	echo "=== $a ==="
+	$a/config.sh
+	if [[ $? -eq 0 ]];then
+		echo "--- $a successfully configured ---"
+	else
+		echo "--- $a not configured ---"
+	fi
 done

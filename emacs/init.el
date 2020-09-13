@@ -19,7 +19,14 @@ There are two things you can do about this warning:
 (package-initialize)
 
 ;;Install usefull packages
-(setq package-list '(auto-complete ac-c-headers dumb-jump nasm-mode monokai-theme))
+(setq package-list
+      '(auto-complete
+	ac-c-headers
+	dumb-jump
+	nasm-mode
+	monokai-theme
+	markdown-mode
+	magit))
 (unless package-archive-contents
   (package-refresh-contents))
 (dolist (package package-list)
@@ -47,12 +54,15 @@ There are two things you can do about this warning:
  column-number-mode t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (ac-config-default)			;auto-complete
+(when (version<= "26.0.50" emacs-version )
+  (add-hook 'prog-mode-hook 'display-line-numbers-mode))
 
 ;; Load specific init files
 (add-to-list 'load-path "~/.emacs.d/init/")
 (load "keybindings.el")
 (load "highlights.el")
 (load "c-config.el")
+(load "c++-config.el")
 (load "sh-config.el")
 (load "nasm-config.el")
 (load "themes.el")
