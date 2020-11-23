@@ -19,8 +19,8 @@ if [ -e $home/.emacs -o -d $home/.emacs.d ]; then
 	fi
 fi
 
-echo "Create $home/.emacs.d directory..."
-if ! (mkdir $home/.emacs.d && cp -r emacs/init* $home/.emacs.d/); then exit $?; fi
+echo "Create new $home/.emacs.d directory..."
+if ! (cp -r emacs/emacs.d $home/.emacs.d); then exit $?; fi
 
 read -p '> Enter your login for the 42 Header (leave blank to disable): ' login
 if [[ -n $login ]]; then
